@@ -9,33 +9,33 @@ import { Site } from './schemas/sites.schema';
 export class SitesController {
     constructor(private readonly sitesService: SitesService) {}
 
-    @Post()
-    @HttpCode(HttpStatus.CREATED)
-    create(@Body() createSiteDto: CreateSiteDto): Promise<Site> {
-        return this.sitesService.create(createSiteDto);
-    }
-
     @Get()
     @HttpCode(HttpStatus.OK)
-    findAll(): Promise<Site[]> {
+    async findAll(): Promise<Site[]> {
         return this.sitesService.findAll();
     }
 
     @Get(':id')
     @HttpCode(HttpStatus.OK)
-    findOne(@Param('id') id: string): Promise<Site> {
+    async findOne(@Param('id') id: string): Promise<Site> {
         return this.sitesService.findOne(id);
+    }
+
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
+    async create(@Body() createSiteDto: CreateSiteDto): Promise<Site> {
+        return this.sitesService.create(createSiteDto);
     }
 
     @Put(':id')
     @HttpCode(HttpStatus.OK)
-    update(@Param('id') id: string, @Body() updateSiteDto: UpdateSiteDto): Promise<Site> {
+    async update(@Param('id') id: string, @Body() updateSiteDto: UpdateSiteDto): Promise<Site> {
         return this.sitesService.update(id, updateSiteDto);
     }
 
     @Delete(':id')
     @HttpCode(HttpStatus.ACCEPTED)
-    remove(@Param('id') id: string): Promise<Site> {
+    async remove(@Param('id') id: string): Promise<Site> {
         return this.sitesService.remove(id);
     }
 }
