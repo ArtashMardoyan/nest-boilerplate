@@ -8,7 +8,7 @@ export class Site {
     @Prop({ required: true })
     name: string;
 
-    @Prop()
+    @Prop({ required: true })
     address: string;
 
     @Prop()
