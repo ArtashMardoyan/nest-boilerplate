@@ -7,6 +7,7 @@ import { getMongoConfig } from './config/mongo.config';
 import { AppController } from './app.controller';
 import mainConfig from './config/main.config';
 import { AppService } from './app.service';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import { AppService } from './app.service';
             inject: [ConfigService],
             useFactory: getMongoConfig
         }),
+        UsersModule,
         SitesModule
     ],
     controllers: [AppController],

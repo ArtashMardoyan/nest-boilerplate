@@ -10,17 +10,17 @@ import { UpdateSiteDto } from './dto/update-site.dto';
 export class SitesService {
     constructor(@InjectModel(Site.name) private siteModel: Model<SiteDocument>) {}
 
+    async create(createSiteDto: CreateSiteDto): Promise<Site> {
+        const createdSite = new this.siteModel(createSiteDto);
+        return createdSite.save();
+    }
+
     async findAll(): Promise<Site[]> {
         return this.siteModel.find().exec();
     }
 
     async findOne(id: string): Promise<Site> {
         return this.siteModel.findById(id);
-    }
-
-    async create(createSiteDto: CreateSiteDto): Promise<Site> {
-        const createdSite = new this.siteModel(createSiteDto);
-        return createdSite.save();
     }
 
     async update(id: string, updateSiteDto: UpdateSiteDto): Promise<Site> {

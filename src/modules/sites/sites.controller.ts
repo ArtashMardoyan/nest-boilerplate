@@ -9,6 +9,12 @@ import { Site } from './schemas/sites.schema';
 export class SitesController {
     constructor(private readonly sitesService: SitesService) {}
 
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
+    async create(@Body() createSiteDto: CreateSiteDto): Promise<Site> {
+        return this.sitesService.create(createSiteDto);
+    }
+
     @Get()
     @HttpCode(HttpStatus.OK)
     async findAll(): Promise<Site[]> {
@@ -19,12 +25,6 @@ export class SitesController {
     @HttpCode(HttpStatus.OK)
     async findOne(@Param('id') id: string): Promise<Site> {
         return this.sitesService.findOne(id);
-    }
-
-    @Post()
-    @HttpCode(HttpStatus.CREATED)
-    async create(@Body() createSiteDto: CreateSiteDto): Promise<Site> {
-        return this.sitesService.create(createSiteDto);
     }
 
     @Put(':id')
