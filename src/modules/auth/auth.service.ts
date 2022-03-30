@@ -22,4 +22,8 @@ export class AuthService {
 
         return { user, accessToken: await this.jwtService.signAsync({ _id: user._id }) };
     }
+
+    async findById(_id: string) {
+        return this.userModel.findById(_id);
+    }
 }

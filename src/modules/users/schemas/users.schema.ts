@@ -6,6 +6,8 @@ export type UserDocument = User & Document;
 
 @Schema({ timestamps: true })
 export class User {
+    _id: string;
+
     @Prop({ required: true })
     firstName: string;
 
@@ -15,7 +17,7 @@ export class User {
     @Prop({ unique: true, required: true })
     email: string;
 
-    @Prop({ required: true, select: false })
+    @Prop({ required: true })
     password: string;
 
     comparePassword(password: string): boolean {
