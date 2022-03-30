@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import { Put, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Controller } from '@nestjs/common';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
 import { User } from './schemas/users.schema';
 
-@Controller('users')
+@Controller({ path: 'users', version: ['1'] })
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
@@ -27,7 +27,7 @@ export class UsersController {
         return this.usersService.findOne(id);
     }
 
-    @Patch(':id')
+    @Put(':id')
     @HttpCode(HttpStatus.OK)
     async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
         return this.usersService.update(id, updateUserDto);

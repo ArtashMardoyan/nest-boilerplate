@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { UsersModule } from './modules/users/users.module';
 import { SitesModule } from './modules/sites/sites.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { getMongoConfig } from './config/mongo.config';
 import mainConfig from './config/main.config';
 
@@ -16,7 +17,8 @@ import mainConfig from './config/main.config';
             useFactory: getMongoConfig
         }),
         UsersModule,
-        SitesModule
+        SitesModule,
+        AuthModule
     ]
 })
 export class AppModule {}

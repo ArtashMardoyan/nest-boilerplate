@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { User, UserDocument } from './schemas/users.schema';
@@ -11,6 +11,12 @@ export class UsersService {
     constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
     async create(createUserDto: CreateUserDto): Promise<User> {
+        const user = await this.userModel.findOne({ email: createUserDto.email }).exec();
+
+        if (user) {
+            throw new BadRequestException('this email already exist');
+        }
+
         const createdUser = new this.userModel(createUserDto);
         return createdUser.save();
     }
