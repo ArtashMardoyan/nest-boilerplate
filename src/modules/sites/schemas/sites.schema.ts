@@ -16,7 +16,7 @@ export class Site {
     @Prop()
     description: string;
 
-    @Prop({ type: SchemaTypes.ObjectId, ref: User.name })
+    @Prop({ type: SchemaTypes.ObjectId, ref: User.name, required: true })
     uId: Types.ObjectId;
 }
 
